@@ -1,5 +1,3 @@
-const plugin = require("@tailwindcss/typography")
-
 module.exports = {
-    plugins: [plugin],
+    plugins: ["prettier-plugin-tailwindcss"],
 }
