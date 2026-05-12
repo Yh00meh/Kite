@@ -54,7 +54,7 @@ export default function ResumeEditor() {
             )}
           </div>
           <div className="hidden md:block md:w-1/2">right</div>
-          <pre>{JSON.stringify(resumeData, null, 2)}</pre>
+          <pre>{JSON.stringify(resumeData, null, 2)} </pre>
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
