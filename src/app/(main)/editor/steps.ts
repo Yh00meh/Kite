@@ -3,6 +3,7 @@ import GeneralInfoForm from "./forms/GeneralInfoForm";
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import React from "react";
 import { EditorFormProps } from "@/lib/types";
+import WorkExperience from "./forms/WorkExperience";
 
 export const steps : {
 
@@ -19,5 +20,10 @@ export const steps : {
     label: "Personal Info",
     component: PersonalInfoForm,
     key: "personal-info",
+  },
+  {
+    label: "Work Experience",
+    component: WorkExperience,
+    key: "work-experience",
   }
 ];

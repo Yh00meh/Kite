@@ -11,14 +11,24 @@ import { useState } from "react";
 import { ResumeValues } from "@/lib/validation";
 import { Form } from "lucide-react";
 
-
 export default function ResumeEditor() {
-
   const searchParams = useSearchParams();
 
   const [resumeData, setResumeData] = useState<ResumeValues>({
     generalInfo: { title: "", description: "" },
-    personalInfo: { firstName: "", lastName: "", email: "", phone: "", city: "", location: "", jobtitle: "", photo: undefined },
+    personalInfo: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      city: "",
+      location: "",
+      jobtitle: "",
+      photo: undefined,
+    },
+    workExperience: {
+      workExperiences: [],
+    },
   });
 
   const currentStep = searchParams.get("step") || "general-info";
@@ -30,12 +40,14 @@ export default function ResumeEditor() {
     window.history.pushState({}, "", newUrl);
   }
 
-  const FormComponent = steps.find((step) => step.key === currentStep)?.component;
+  const FormComponent = steps.find(
+    (step) => step.key === currentStep,
+  )?.component;
 
   return (
     <div className="flex grow flex-col">
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight overflow-y-auto">
+        <h1 className="overflow-y-auto text-2xl font-semibold tracking-tight">
           Create your resume
         </h1>
         <p className="text-muted-foreground text-sm">
@@ -43,8 +55,8 @@ export default function ResumeEditor() {
         </p>
       </header>
       <main className="relative grow">
-        <div className="absolute bottom-0 top-0 flex w-full">
-          <div className="space-y-8 w-full overflow-y-auto px-3 py-5 md:w-1/2">
+        <div className="absolute top-0 bottom-0 flex w-full">
+          <div className="w-full space-y-8 overflow-y-auto px-3 py-5 md:w-1/2">
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
             {FormComponent && (
               <FormComponent

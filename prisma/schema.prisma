@@ -36,3 +36,33 @@ model Resume {
 
   @@map("resumes")
 }
+
+model WorkExperience {
+  id          String   @id @default(cuid())
+  resumeId    String
+  company     String
+  position    String
+  startDate   DateTime
+  endDate     DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("work_experiences")
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  resumeId    String
+  
+  institution String
+  degree      String
+  fieldOfStudy String
+  startDate   DateTime
+  endDate     DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("educations")
+}

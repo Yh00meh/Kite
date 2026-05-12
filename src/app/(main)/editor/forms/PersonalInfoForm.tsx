@@ -13,7 +13,13 @@ import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 import { resume } from "react-dom/server";
 
-export default function PersonalInfoForm({ resumeData, setResumeData }: { resumeData: PersonalInfoValues; setResumeData: React.Dispatch<React.SetStateAction<PersonalInfoValues>> }) {
+export default function PersonalInfoForm({
+  resumeData,
+  setResumeData,
+}: {
+  resumeData: PersonalInfoValues;
+  setResumeData: React.Dispatch<React.SetStateAction<PersonalInfoValues>>;
+}) {
   const form = useForm<PersonalInfoValues>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
@@ -100,7 +106,11 @@ export default function PersonalInfoForm({ resumeData, setResumeData }: { resume
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="john.doe@example.com" {...field} type="email"/>
+                  <Input
+                    placeholder="john.doe@example.com"
+                    {...field}
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
