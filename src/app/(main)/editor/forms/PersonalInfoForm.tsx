@@ -11,30 +11,31 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
+import { resume } from "react-dom/server";
 
-export default function PersonalInfoForm() {
+export default function PersonalInfoForm({ resumeData, setResumeData }: { resumeData: PersonalInfoValues; setResumeData: React.Dispatch<React.SetStateAction<PersonalInfoValues>> }) {
   const form = useForm<PersonalInfoValues>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      city: "",
-      location: "",
-      jobtitle: "",
+      firstName: resumeData.firstName || "",
+      lastName: resumeData.lastName || "",
+      email: resumeData.email || "",
+      phone: resumeData.phone || "",
+      city: resumeData.city || "",
+      location: resumeData.location || "",
+      jobtitle: resumeData.jobtitle || "",
+      photo: resumeData.photo || undefined,
     },
   });
 
   useEffect(() => {
-    const { unsubscribe } = form.watch(async () => {
+    const { unsubscribe } = form.watch(async (values) => {
       const isValid = await form.trigger();
-      console.log(isValid);
+      if (!isValid) return;
+      setResumeData({ ...resumeData, ...values });
     });
-    return () => {
-      unsubscribe();
-    };
-  }, [form]);
+    return unsubscribe;
+  }, [form, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">
