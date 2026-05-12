@@ -1,7 +1,6 @@
 import {
   generalInfoSchema,
   GeneralInfoValues,
-  ResumeValues,
 } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

@@ -4,6 +4,7 @@ import PersonalInfoForm from "./forms/PersonalInfoForm";
 import React from "react";
 import { EditorFormProps } from "@/lib/types";
 import WorkExperience from "./forms/WorkExperience";
+import EducationForm from "./forms/EducationForm";
 
 export const steps : {
 
@@ -18,12 +19,17 @@ export const steps : {
   },
   {
     label: "Personal Info",
-    component: PersonalInfoForm,
+    component: PersonalInfoForm as React.ComponentType<EditorFormProps>,
     key: "personal-info",
   },
   {
     label: "Work Experience",
     component: WorkExperience,
     key: "work-experience",
+  },
+  {
+    label: "Education",
+    component: EducationForm,
+    key: "education",
   }
 ];

@@ -1,15 +1,11 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import GeneralInfoForm from "./forms/GeneralInfoForm";
-import PersonalInfoForm from "./forms/PersonalInfoForm";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./steps";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import { useState } from "react";
 import { ResumeValues } from "@/lib/validation";
-import { Form } from "lucide-react";
+
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
@@ -28,6 +24,9 @@ export default function ResumeEditor() {
     },
     workExperience: {
       workExperiences: [],
+    },
+    education: {
+      educations: [],
     },
   });
 
