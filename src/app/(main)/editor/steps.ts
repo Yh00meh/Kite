@@ -1,28 +1,23 @@
-import { Component } from "lucide-react";
+
 import GeneralInfoForm from "./forms/GeneralInfoForm";
 import PersonalInfoForm from "./forms/PersonalInfoForm";
+import React from "react";
+import { EditorFormProps } from "@/lib/types";
 
-export const steps = [
+export const steps : {
+
+  label: string;
+  component: React.ComponentType<EditorFormProps>;
+  key: string;
+}[] = [
   {
-    key: "general-info",
-    Component: GeneralInfoForm,
     label: "General Info",
+    component: GeneralInfoForm,
+    key: "general-info",
   },
   {
-    key: "personal-info",
-    Component: PersonalInfoForm,
     label: "Personal Info",
-  },
-  {
-    key: "experience",
-    label: "Experience",
-  },
-  {
-    key: "education",
-    label: "Education",
-  },
-  {
-    key: "skills",
-    label: "Skills",
-  },
+    component: PersonalInfoForm,
+    key: "personal-info",
+  }
 ];

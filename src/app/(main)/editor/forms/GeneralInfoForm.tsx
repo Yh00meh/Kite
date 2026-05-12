@@ -1,4 +1,4 @@
-import { generalInfoSchema, GeneralInfoValues } from "@/lib/validation";
+import { generalInfoSchema, GeneralInfoValues, ResumeValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -11,15 +11,26 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useEffect } from "react";
+import { EditorFormProps } from "@/lib/types";
 
-export default function GeneralInfoForm() {
+export default function GeneralInfoForm({ resumeData, setResumeData }: EditorFormProps) {
   const form = useForm<GeneralInfoValues>({
     resolver: zodResolver(generalInfoSchema),
     defaultValues: {
-      title: "",
-      description: "",
+      title: resumeData.generalInfo?.title || "",
+      description: resumeData.generalInfo?.description || "",
     },
   });
+
+    useEffect(() => {
+      const { unsubscribe } = form.watch(async (values) => {
+        const isValid = await form.trigger();
+        if (!isValid) return;
+        setResumeData({ ...resumeData, generalInfo: values });
+      });
+      return unsubscribe;
+    }, [form, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">
