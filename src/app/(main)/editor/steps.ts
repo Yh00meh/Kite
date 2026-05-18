@@ -11,6 +11,7 @@ export const steps : {
   label: string;
   component: React.ComponentType<EditorFormProps>;
   key: string;
+  
 }[] = [
   {
     label: "General Info",
@@ -19,7 +20,7 @@ export const steps : {
   },
   {
     label: "Personal Info",
-    component: PersonalInfoForm as React.ComponentType<EditorFormProps>,
+    component: PersonalInfoForm,
     key: "personal-info",
   },
   {

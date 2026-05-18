@@ -11,25 +11,23 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
+import { EditorFormProps } from "@/lib/types";
 
 export default function PersonalInfoForm({
   resumeData,
   setResumeData,
-}: {
-  resumeData: PersonalInfoValues;
-  setResumeData: React.Dispatch<React.SetStateAction<PersonalInfoValues>>;
-}) {
+}: EditorFormProps) {
   const form = useForm<PersonalInfoValues>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      firstName: resumeData.firstName || "",
-      lastName: resumeData.lastName || "",
-      email: resumeData.email || "",
-      phone: resumeData.phone || "",
-      city: resumeData.city || "",
-      location: resumeData.location || "",
-      jobtitle: resumeData.jobtitle || "",
-      photo: resumeData.photo || undefined,
+      firstName: resumeData.personalInfo?.firstName || "",
+      lastName: resumeData.personalInfo?.lastName || "",
+      email: resumeData.personalInfo?.email || "",
+      phone: resumeData.personalInfo?.phone || "",
+      city: resumeData.personalInfo?.city || "",
+      location: resumeData.personalInfo?.location || "",
+      jobtitle: resumeData.personalInfo?.jobtitle || "",
+      photo: resumeData.personalInfo?.photo || undefined,
     },
   });
 
@@ -37,7 +35,19 @@ export default function PersonalInfoForm({
     const { unsubscribe } = form.watch(async (values) => {
       const isValid = await form.trigger();
       if (!isValid) return;
-      setResumeData({ ...resumeData, ...values });
+      setResumeData({ 
+        ...resumeData, 
+        personalInfo: {
+          photo: values.photo || undefined,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phone: values.phone,
+          location: values.location,
+          jobtitle: values.jobtitle,
+          city: values.city,
+        }
+      });
     });
     return unsubscribe;
   }, [form, resumeData, setResumeData]);
